@@ -1,0 +1,51 @@
+@import "tailwindcss";
+
+/* Tokens from Abstract's design guidelines (v3): one white plane, neutral
+   borders instead of shadows, and Abstract green only for the primary action. */
+:root {
+  color-scheme: light;
+  --background: #fff;
+  --foreground: #18181b;
+  --primary: #1fe492;
+  --primary-foreground: #18181b;
+  --link: #006344;
+  --muted: #f3f3f1;
+  --muted-foreground: #6e6e77;
+  --border: #d4d4d0;
+  --ring: #6e6e77;
+  --radius: 0.5rem;
+  --allow: #eef7f1;
+  --allow-foreground: #337654;
+  --review: #fcf6e8;
+  --review-foreground: #7e5f1f;
+  --block: #fcf0ef;
+  --block-foreground: #96413f;
+}
+
+@theme inline {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-link: var(--link);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+  --color-allow: var(--allow);
+  --color-allow-foreground: var(--allow-foreground);
+  --color-review: var(--review);
+  --color-review-foreground: var(--review-foreground);
+  --color-block: var(--block);
+  --color-block-foreground: var(--block-foreground);
+  --radius-md: calc(var(--radius) * 0.75);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.5);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
