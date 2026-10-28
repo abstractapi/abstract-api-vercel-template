@@ -33,10 +33,10 @@ export function SignupForm({
   testMode: boolean;
   turnstileSiteKey: string | null;
 }) {
-  const [state, action, pending] = useActionState<SignupState, FormData>(signup, {
-    status: "idle",
-    values: EMPTY,
-  });
+  const [state, action, pending] = useActionState<SignupState, FormData>(
+    submitSignup,
+    { status: "idle", values: EMPTY },
+  );
   const [values, setValues] = useState<SignupValues>(state.values);
   const errors = state.status === "invalid" ? state.errors : {};
 
@@ -155,6 +155,22 @@ export function SignupForm({
       )}
     </div>
   );
+}
+
+// A request that never reaches the server action (a rate limit rule answering
+// 429, a network drop, a deploy in progress) would otherwise replace the whole
+// page with an error screen. Keep the form and what the visitor typed instead.
+async function submitSignup(previous: SignupState, formData: FormData): Promise<SignupState> {
+  try {
+    return await signup(previous, formData);
+  } catch {
+    const value = (name: string) => String(formData.get(name) ?? "");
+    return {
+      status: "invalid",
+      values: { name: value("name"), email: value("email"), phone: value("phone"), ip: value("ip") },
+      errors: { form: "Could not check this signup. Wait a few minutes and try again." },
+    };
+  }
 }
 
 const inputClass =
