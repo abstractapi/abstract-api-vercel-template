@@ -29,6 +29,14 @@ export function ResultPanel({
   accountId: string | null;
 }) {
   const { label, className, Icon } = VERDICTS[decision.verdict];
+  const outcomes = (Object.keys(results) as ProductId[]).flatMap((product) => {
+    const outcome = results[product];
+    return outcome ? [{ product, outcome }] : [];
+  });
+  const failed = outcomes.flatMap(({ product, outcome }) =>
+    outcome.status === "error" ? [{ product, message: outcome.message }] : [],
+  );
+  const noneRan = !outcomes.some(({ outcome }) => outcome.status === "ok");
 
   return (
     <section aria-live="polite" className="divide-y divide-border rounded-xl border border-border">
@@ -64,8 +72,19 @@ export function ResultPanel({
               </li>
             ))}
           </ul>
+        ) : noneRan ? (
+          <p>No check could run, so the signup was allowed without checks.</p>
         ) : (
           <p>No risk signals found.</p>
+        )}
+        {failed.length > 0 && (
+          <ul className="space-y-1 text-muted-foreground">
+            {failed.map(({ product, message }) => (
+              <li key={product}>
+                {PRODUCTS[product].name} could not run: {message}
+              </li>
+            ))}
+          </ul>
         )}
       </div>
 

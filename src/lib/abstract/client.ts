@@ -34,11 +34,18 @@ export async function callAbstract<T>(
   }
 }
 
+// Free plans answer `quota_reached` and paid plans `plan_limit_reached` once
+// the key has used its quota for the billing period.
+const QUOTA_CODES = new Set(["quota_reached", "plan_limit_reached"]);
+
 async function errorMessage(res: Response): Promise<string> {
   if (res.status === 401) return "Invalid API key";
   if (res.status === 429) return "Rate limit reached";
   try {
     const body = await res.json();
+    const code = body?.error?.code;
+    if (typeof code === "string" && QUOTA_CODES.has(code.toLowerCase()))
+      return "Quota reached for this key";
     if (typeof body?.error?.message === "string") return body.error.message;
   } catch {}
   return `Abstract API returned ${res.status}`;
