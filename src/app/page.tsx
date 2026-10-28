@@ -3,7 +3,7 @@ import { BookOpen, Code, Triangle } from "lucide-react";
 
 import { SignupForm } from "@/components/signup-form";
 import { CHECKS, PRODUCTS } from "@/lib/checks";
-import { abstractUrl, DEPLOY_URL, REPOSITORY_URL } from "@/lib/links";
+import { abstractUrl, DEPLOY_URL, DOCS_URL, REPOSITORY_URL } from "@/lib/links";
 import { testMode } from "@/lib/test-mode";
 
 const RULES_EXCERPT = `if (email.isDisposable) block("email", "Disposable email address");
@@ -16,11 +16,11 @@ export default function Home() {
     <div className="flex flex-1 flex-col">
       <header className="border-b border-border">
         <div className="mx-auto flex h-14 w-full max-w-5xl items-center justify-between px-4">
-          <a href={abstractUrl()} aria-label="Abstract API">
-            <Image src="/abstract-logo.svg" alt="Abstract API" width={119} height={18} priority />
+          <a href={abstractUrl()} aria-label="Abstract">
+            <Image src="/abstract-logo.svg" alt="Abstract" width={119} height={18} priority />
           </a>
           <a
-            href={abstractUrl("/api")}
+            href={DOCS_URL}
             className="inline-flex items-center gap-2 font-medium hover:underline"
           >
             <BookOpen className="size-4" aria-hidden />
@@ -36,7 +36,7 @@ export default function Home() {
           </h1>
           <p className="max-w-prose text-muted-foreground">
             This form sends the email, phone number and IP address of each
-            signup to Abstract API, then allows, flags or blocks it with rules
+            signup to Abstract, then allows, flags or blocks it with rules
             you can edit in one file.
           </p>
           <ul className="flex flex-wrap gap-2">
@@ -85,7 +85,7 @@ export default function Home() {
       <footer className="border-t border-border">
         <div className="mx-auto flex h-14 w-full max-w-5xl items-center px-4 text-xs text-muted-foreground">
           <a href={abstractUrl()} className="hover:underline">
-            Powered by Abstract API
+            Powered by Abstract
           </a>
         </div>
       </footer>

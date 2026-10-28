@@ -13,6 +13,8 @@ export function abstractUrl(path = "/"): string {
 
 export const DASHBOARD_URL = withUtm(new URL("https://app.abstractapi.com/"));
 
+export const DOCS_URL = withUtm(new URL("https://docs.abstractapi.com/"));
+
 export const REPOSITORY_URL = "https://github.com/abstractapi/abstract-api-vercel-template";
 
 // Until the Abstract API integration is live, the Deploy button asks for the

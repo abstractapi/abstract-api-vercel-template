@@ -29,7 +29,7 @@ export async function callAbstract<T>(
     const timedOut = err instanceof DOMException && err.name === "TimeoutError";
     return {
       status: "error",
-      message: timedOut ? "Timed out" : "Could not reach Abstract API",
+      message: timedOut ? "Timed out" : "Could not reach Abstract",
     };
   }
 }
@@ -48,7 +48,7 @@ async function errorMessage(res: Response): Promise<string> {
       return "Quota reached for this key";
     if (typeof body?.error?.message === "string") return body.error.message;
   } catch {}
-  return `Abstract API returned ${res.status}`;
+  return `Abstract returned ${res.status}`;
 }
 
 // Reads a nested field without trusting the response shape.
