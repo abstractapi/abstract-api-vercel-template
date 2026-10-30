@@ -17,26 +17,14 @@ export const DOCS_URL = withUtm(new URL("https://docs.abstractapi.com/"));
 
 export const REPOSITORY_URL = "https://github.com/abstractapi/abstract-api-vercel-template";
 
-// Until the Abstract API integration is live, the Deploy button asks for the
-// three keys. Once it is, `integration-ids` replaces `env` and the keys arrive
-// on their own.
+// The Deploy button clones this repository and installs the Abstract API
+// integration: the developer signs in or signs up in its popup, picks the
+// products, and the keys arrive in the new project as environment variables.
 export const DEPLOY_URL = (() => {
   const url = new URL("https://vercel.com/new/clone");
   url.searchParams.set("repository-url", REPOSITORY_URL);
   url.searchParams.set("project-name", "abstract-api-signup-checks");
   url.searchParams.set("repository-name", "abstract-api-signup-checks");
-  url.searchParams.set(
-    "env",
-    [
-      "ABSTRACT_EMAIL_INTELLIGENCE_API_KEY",
-      "ABSTRACT_PHONE_INTELLIGENCE_API_KEY",
-      "ABSTRACT_IP_INTELLIGENCE_API_KEY",
-    ].join(","),
-  );
-  url.searchParams.set(
-    "envDescription",
-    "One API key per Abstract product. Each product has a free plan.",
-  );
-  url.searchParams.set("envLink", DASHBOARD_URL);
+  url.searchParams.set("integration-ids", "oac_DMEIgl5tpLFotArD8JRb5PtP");
   return url.toString();
 })();
